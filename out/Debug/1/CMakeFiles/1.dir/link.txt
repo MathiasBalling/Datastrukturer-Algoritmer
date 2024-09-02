@@ -1,0 +1,1 @@
+/opt/homebrew/Cellar/llvm/18.1.8/bin/clang++ -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/1.dir/1.cpp.o -o 1  -Wl,-rpath,/opt/homebrew/lib /opt/homebrew/lib/libfmt.11.0.2.dylib

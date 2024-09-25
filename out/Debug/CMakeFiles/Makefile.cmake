@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "/Users/mathiaschristiansen/Projects/Data_algorithms/1/CMakeLists.txt"
+  "/Users/mathiaschristiansen/Projects/Data_algorithms/2/CMakeLists.txt"
   "/Users/mathiaschristiansen/Projects/Data_algorithms/CMakeLists.txt"
   "/Users/mathiaschristiansen/Projects/Data_algorithms/lib/CMakeLists.txt"
   "CMakeFiles/3.30.3/CMakeCXXCompiler.cmake"
@@ -45,9 +46,11 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "lib/CMakeFiles/CMakeDirectoryInformation.cmake"
   "1/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "2/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "1/CMakeFiles/1.dir/DependInfo.cmake"
+  "2/CMakeFiles/2.dir/DependInfo.cmake"
   )

@@ -5,3 +5,6 @@
 /Users/mathiaschristiansen/Projects/Data_algorithms/out/Debug/1/CMakeFiles/1.dir
 /Users/mathiaschristiansen/Projects/Data_algorithms/out/Debug/1/CMakeFiles/edit_cache.dir
 /Users/mathiaschristiansen/Projects/Data_algorithms/out/Debug/1/CMakeFiles/rebuild_cache.dir
+/Users/mathiaschristiansen/Projects/Data_algorithms/out/Debug/2/CMakeFiles/2.dir
+/Users/mathiaschristiansen/Projects/Data_algorithms/out/Debug/2/CMakeFiles/edit_cache.dir
+/Users/mathiaschristiansen/Projects/Data_algorithms/out/Debug/2/CMakeFiles/rebuild_cache.dir

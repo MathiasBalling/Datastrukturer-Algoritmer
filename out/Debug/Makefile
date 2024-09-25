@@ -129,6 +129,19 @@ depend:
 	$(MAKE) $(MAKESILENT) -f 1/CMakeFiles/1.dir/build.make 1/CMakeFiles/1.dir/build
 .PHONY : 1/fast
 
+#=============================================================================
+# Target rules for targets named 2
+
+# Build rule for target.
+2 : cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 2
+.PHONY : 2
+
+# fast build rule for target.
+2/fast:
+	$(MAKE) $(MAKESILENT) -f 2/CMakeFiles/2.dir/build.make 2/CMakeFiles/2.dir/build
+.PHONY : 2/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -138,6 +151,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... 1"
+	@echo "... 2"
 .PHONY : help
 
 

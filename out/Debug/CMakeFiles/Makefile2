@@ -65,16 +65,19 @@ CMAKE_BINARY_DIR = /Users/mathiaschristiansen/Projects/Data_algorithms/out/Debug
 # The main recursive "all" target.
 all: lib/all
 all: 1/all
+all: 2/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
 preinstall: lib/preinstall
 preinstall: 1/preinstall
+preinstall: 2/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: lib/clean
 clean: 1/clean
+clean: 2/clean
 .PHONY : clean
 
 #=============================================================================
@@ -91,6 +94,21 @@ clean: 1/clean
 # Recursive "clean" directory target.
 1/clean: 1/CMakeFiles/1.dir/clean
 .PHONY : 1/clean
+
+#=============================================================================
+# Directory level rules for directory 2
+
+# Recursive "all" directory target.
+2/all: 2/CMakeFiles/2.dir/all
+.PHONY : 2/all
+
+# Recursive "preinstall" directory target.
+2/preinstall:
+.PHONY : 2/preinstall
+
+# Recursive "clean" directory target.
+2/clean: 2/CMakeFiles/2.dir/clean
+.PHONY : 2/clean
 
 #=============================================================================
 # Directory level rules for directory lib
@@ -132,6 +150,32 @@ lib/clean:
 1/CMakeFiles/1.dir/clean:
 	$(MAKE) $(MAKESILENT) -f 1/CMakeFiles/1.dir/build.make 1/CMakeFiles/1.dir/clean
 .PHONY : 1/CMakeFiles/1.dir/clean
+
+#=============================================================================
+# Target rules for target 2/CMakeFiles/2.dir
+
+# All Build rule for target.
+2/CMakeFiles/2.dir/all:
+	$(MAKE) $(MAKESILENT) -f 2/CMakeFiles/2.dir/build.make 2/CMakeFiles/2.dir/depend
+	$(MAKE) $(MAKESILENT) -f 2/CMakeFiles/2.dir/build.make 2/CMakeFiles/2.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mathiaschristiansen/Projects/Data_algorithms/out/Debug/CMakeFiles --progress-num=3,4 "Built target 2"
+.PHONY : 2/CMakeFiles/2.dir/all
+
+# Build rule for subdir invocation for target.
+2/CMakeFiles/2.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mathiaschristiansen/Projects/Data_algorithms/out/Debug/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 2/CMakeFiles/2.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mathiaschristiansen/Projects/Data_algorithms/out/Debug/CMakeFiles 0
+.PHONY : 2/CMakeFiles/2.dir/rule
+
+# Convenience name for target.
+2 : 2/CMakeFiles/2.dir/rule
+.PHONY : 2
+
+# clean rule for target.
+2/CMakeFiles/2.dir/clean:
+	$(MAKE) $(MAKESILENT) -f 2/CMakeFiles/2.dir/build.make 2/CMakeFiles/2.dir/clean
+.PHONY : 2/CMakeFiles/2.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

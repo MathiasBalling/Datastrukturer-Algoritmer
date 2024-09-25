@@ -4,5 +4,11 @@
   "command": "/opt/homebrew/Cellar/llvm/18.1.8/bin/clang++ -DFMT_SHARED -isystem /opt/homebrew/include -g -std=gnu++23 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wall -Wextra -pedantic -o CMakeFiles/1.dir/1.cpp.o -c /Users/mathiaschristiansen/Projects/Data_algorithms/1/1.cpp",
   "file": "/Users/mathiaschristiansen/Projects/Data_algorithms/1/1.cpp",
   "output": "1/CMakeFiles/1.dir/1.cpp.o"
+},
+{
+  "directory": "/Users/mathiaschristiansen/Projects/Data_algorithms/out/Debug/2",
+  "command": "/opt/homebrew/Cellar/llvm/18.1.8/bin/clang++ -DFMT_SHARED -isystem /opt/homebrew/include -g -std=gnu++23 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wall -Wextra -pedantic -o CMakeFiles/2.dir/2.cpp.o -c /Users/mathiaschristiansen/Projects/Data_algorithms/2/2.cpp",
+  "file": "/Users/mathiaschristiansen/Projects/Data_algorithms/2/2.cpp",
+  "output": "2/CMakeFiles/2.dir/2.cpp.o"
 }
 ]

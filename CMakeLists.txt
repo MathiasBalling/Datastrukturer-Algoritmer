@@ -9,6 +9,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Build parallel
 set(CMAKE_BUILD_PARALLEL_LEVEL 10)
 
-add_subdirectory(lib)
 add_subdirectory(1)
 add_subdirectory(2)
+add_subdirectory(port)

@@ -1,6 +1,6 @@
-#include <fmt/core.h>
+
 
 int main() {
-  fmt::println("Hello");
+  std::println("Hello");
   return 0;
 }

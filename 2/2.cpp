@@ -1,5 +1,4 @@
 #include <cassert>
-#include <fmt/core.h>
 #include <stack>
 #include <string>
 
@@ -40,6 +39,6 @@ void exc_1() {
 int main() {
   exc_1();
 
-  fmt::println("All test passed 😀");
+  std::println("All test passed 😀");
   return 0;
 }

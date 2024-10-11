@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/mathiaschristiansen/Projects/Data_algorithms/1/1.cpp" "1/CMakeFiles/1.dir/1.cpp.o" "gcc" "1/CMakeFiles/1.dir/1.cpp.o.d"
+  "/Users/balling/projects/Datastrukturer-Algoritmer/1/1.cpp" "1/CMakeFiles/1.dir/1.cpp.o" "gcc" "1/CMakeFiles/1.dir/1.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

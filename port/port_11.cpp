@@ -34,6 +34,6 @@ int main() {
 
   assert(winning_cadidate({7, 4, 3, 5, 3, 1, 6, 4, 5, 1, 7, 5}) == -1);
   assert(winning_cadidate({7, 7, 3, 5, 7, 1, 6, 7, 5, 7, 7, 7}) == 7);
-  std::println("All test passed 😀");
+  std::println("All test passed!");
   return 0;
 }

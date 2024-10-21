@@ -1,3 +1,9 @@
-.cache
-out
+.cache/
 .DS_Store
+out/
+.aux
+.fdb_latexmk
+.fls
+.log
+.out
+.toc

@@ -26,6 +26,6 @@ int main() {
   assert(un_even_square(4) == 10);
   assert(un_even_square(10) == 165);
 
-  std::println("All test passed 😀");
+  std::println("All test passed!");
   return 0;
 }

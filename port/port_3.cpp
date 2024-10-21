@@ -24,6 +24,6 @@ int main() {
   assert(additive("82842905") == false);
   assert(additive("12342905") == true);
 
-  std::println("All test passed 😀");
+  std::println("All test passed!");
   return 0;
 }

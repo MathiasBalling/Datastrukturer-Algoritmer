@@ -2,7 +2,7 @@
 int sumDivisibleBy3 (int N)
 Algoritmen returnerer summen af heltal sterre end 0 og mindre end eller lig med
 N, som er dividérbare med 3. Kaldt med N = 12 er den korrekte returvardi 30
-(3+6+9+12). Kaldt med N = 14 er den korrekte returvardi ogs 30. Din algoritme
+(3+6+9+12). Kaldt med N = 14 er den korrekte returvardi også 30. Din algoritme
 skal optimeres säledes, at overflodige rekursive kald undgas.
 */
 
@@ -25,7 +25,7 @@ int main() {
   assert(sumDivisibleBy3(14) == 30);
   std::println("{}", sumDivisibleBy3(30));
 
-  std::println("All test passed 😀");
+  std::println("All test passed!");
 
   return 0;
 }

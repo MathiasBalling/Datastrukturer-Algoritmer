@@ -13,13 +13,15 @@ int logTo(int N) {
     return 0;
   return 1 + logTo(N / 2);
 }
-int main() {
 
+int main() {
   assert(logTo(4096) == 12);
+  assert(logTo(50) == 5);
   assert(logTo(32) == 5);
+  assert(logTo(3) == 1);
   assert(logTo(2) == 1);
   assert(logTo(1) == 0);
 
-  std::println("All test passed 😀");
+  std::println("All test passed!");
   return 0;
 }

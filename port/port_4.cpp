@@ -49,6 +49,6 @@ int main() {
   std::println("{}", res);
   assert(res == res_t1);
 
-  std::println("All test passed 😀");
+  std::println("All test passed!");
   return 0;
 }

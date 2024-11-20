@@ -47,6 +47,8 @@ public:
 
   void printInternalPathLenght() const;
 
+  void printCountBranches() const;
+
 private:
   BinaryNode *root;
 
@@ -55,6 +57,8 @@ private:
   void remove(const int &x, BinaryNode *&t);
   BinaryNode *findMin(BinaryNode *t) const;
   BinaryNode *findMax(BinaryNode *t) const;
+
+  BinaryNode *getOnlyChild(BinaryNode *t) const;
 
   bool contains(const int &x, BinaryNode *t) const;
 
@@ -71,8 +75,8 @@ private:
   int countNodes(BinaryNode *t) const;
   int countLeaves(BinaryNode *t) const;
   int countFullNodes(BinaryNode *t) const;
-
   int internalPathLenght(BinaryNode *t, int depth) const;
+  int countBranches(BinaryNode *t) const;
 };
 
 #endif

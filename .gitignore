@@ -1,9 +1,11 @@
 .cache/
 .DS_Store
 out/
-.aux
-.fdb_latexmk
-.fls
-.log
-.out
-.toc
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+_minted*/
+compile_commands.json

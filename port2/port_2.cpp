@@ -2,25 +2,24 @@
 #include <print>
 
 int main(int argc, char *argv[]) {
-  std::array<int, 10> inputs = {5, 3, 7, 2, 4, 6, 8, 1, 9, 0};
+  std::vector<int> inputs = {7, 4,  28, 3,  55, 2,  51, 60,
+                             1, 48, 58, 69, 40, 57, 35};
   auto tree = BinarySearchTree();
   for (int i : inputs) {
     tree.insert(i);
   }
-  std::println("In Order");
-  tree.printTreeInOrder();
-  std::println("Pre Order");
-  tree.printTreePreOrder();
-  std::println("Post Order");
-  tree.printTreePostOrder();
+
+  // Print the tree to garantee that the tree is correct as per the assignment
   std::println("Level Order");
   tree.printTreeLevelOrder();
-
   std::println("Counts");
   tree.printCountNodes();
   tree.printCountLeaves();
   tree.printCountFullNodes();
   tree.printInternalPathLenght();
+
+  std::println("Counting branches");
+  tree.printCountBranches();
 
   return 0;
 }

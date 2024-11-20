@@ -232,3 +232,73 @@ int BinarySearchTree::internalPathLenght(BinaryNode *t, int depth) const {
   return depth + internalPathLenght(t->left, depth + 1) +
          internalPathLenght(t->right, depth + 1);
 }
+
+void BinarySearchTree::printCountBranches() const {
+  int count = countBranches(root);
+  cout << "Branches count: " << count << endl;
+}
+
+BinaryNode *BinarySearchTree::getOnlyChild(BinaryNode *t) const {
+  if (t->left != nullptr && t->right == nullptr)
+    return t->left;
+  else if (t->right != nullptr && t->left == nullptr) {
+    return t->right;
+  } else {
+    return nullptr;
+  }
+}
+
+int BinarySearchTree::countBranches(BinaryNode *t) const {
+  // Node X har ét barn.
+  // Node X har ingen søskende.
+  // Node X’s barn har ingen søskende.
+  // Node X’s barn har ét barn, som er et blad.
+
+  // Early return
+  if (t == nullptr)
+    return 0;
+
+  // Check for only child
+  BinaryNode *onlyChild = getOnlyChild(t);
+  if (onlyChild == nullptr) {
+    // Not only child
+    // Can be 0 or 2 children
+
+    // Skip nodes with siblings
+    if (t->left != nullptr && t->right != nullptr) {
+      return 0 + countBranches(t->left->left) + countBranches(t->left->right) +
+             countBranches(t->right->left) + countBranches(t->right->right);
+    }
+
+    // Skip nodes with no children
+    return 0;
+  }
+
+  // Check for child with only child
+  BinaryNode *onlyChildOnlyChild = getOnlyChild(onlyChild);
+  if (onlyChildOnlyChild == nullptr) {
+    // Not only child
+    // Can be 0 or 2 children
+
+    // Skip nodes with siblings
+    if (onlyChild->left != nullptr && onlyChild->right != nullptr) {
+      return 0 + countBranches(onlyChild->left->left) +
+             countBranches(onlyChild->left->right) +
+             countBranches(onlyChild->right->left) +
+             countBranches(onlyChild->right->right);
+    }
+
+    // Skip nodes with no children
+    return 0;
+  }
+
+  // Check for leaf
+  if (onlyChildOnlyChild->left == nullptr &&
+      onlyChildOnlyChild->right == nullptr) {
+    cout << "Branch at: " << t->element << endl;
+    return 1;
+  }
+
+  // Not leaf check from onlychild and down
+  return 0 + countBranches(onlyChild->left) + countBranches(onlyChild->right);
+}

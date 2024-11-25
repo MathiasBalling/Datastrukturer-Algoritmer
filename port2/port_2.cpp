@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
   tree.printCountFullNodes();
   tree.printInternalPathLenght();
 
-  std::println("Counting branches");
+  std::println("Counting branches:");
   tree.printCountBranches();
 
   return 0;

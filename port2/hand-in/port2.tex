@@ -86,39 +86,49 @@ int BinarySearchTree::countBranches(BinaryNode *t) const {
   // Early return
   if (t == nullptr)
     return 0;
-  // Check for only child
-  BinaryNode *onlyChild = getOnlyChild(t);
-  if (onlyChild == nullptr) {
-    // Not only child (0 or 2 children)
-    // Skip nodes with siblings
+  // Check for only child (X)
+  BinaryNode *X = getOnlyChild(t);
+  if (X == nullptr) {
+    // Not only child. Can be 0 or 2 children
+    // Recursively check for branches
     if (t->left != nullptr && t->right != nullptr) {
-      return 0 + countBranches(t->left->left) + countBranches(t->left->right) +
-             countBranches(t->right->left) + countBranches(t->right->right);
+      return countBranches(t->left) + countBranches(t->right);
     }
     // Skip nodes with no children
     return 0;
   }
-  // Check for child with only child
-  BinaryNode *onlyChildOnlyChild = getOnlyChild(onlyChild);
-  if (onlyChildOnlyChild == nullptr) {
-    // Not only child (0 or 2 children)
-    // Skip nodes with siblings
-    if (onlyChild->left != nullptr && onlyChild->right != nullptr) {
-      return 0 + countBranches(onlyChild->left->left) +
-             countBranches(onlyChild->left->right) +
-             countBranches(onlyChild->right->left) +
-             countBranches(onlyChild->right->right);
+
+  // Check for child with only child (X's child)
+  BinaryNode *X_Child = getOnlyChild(X);
+  if (X_Child == nullptr) {
+    // Not only child. Can be 0 or 2 children
+    // Recursively check for branches
+    if (X->left != nullptr && X->right != nullptr) {
+      return countBranches(X->left) + countBranches(X->right);
     }
     // Skip nodes with no children
     return 0;
   }
-  // Check for leaf
-  if (onlyChildOnlyChild->left == nullptr &&
-      onlyChildOnlyChild->right == nullptr) {
+
+  // Check for child with only child (X's child child)
+  BinaryNode *X_Child_Child = getOnlyChild(X_Child);
+  if (X_Child_Child == nullptr) {
+    // Not only child. Can be 0 or 2 children
+    // Recursively check for branches
+    if (X_Child->left != nullptr && X_Child->right != nullptr) {
+      return countBranches(X_Child->left) + countBranches(X_Child->right);
+    }
+    // Skip nodes with no children
+    return 0;
+  }
+
+  // Check for leaf (X's child's child and leaf)
+  if (X_Child_Child->left == nullptr && X_Child_Child->right == nullptr) {
+    // Found leaf -> This is a branch
     return 1;
   }
-  // Not leaf check from onlychild and down
-  return 0 + countBranches(onlyChild->left) + countBranches(onlyChild->right);
+  // Not leaf check from X_Child and down
+  return countBranches(X_Child);
 }
 \end{minted}
 

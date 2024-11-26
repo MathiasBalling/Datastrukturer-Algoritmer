@@ -256,20 +256,63 @@ int BinarySearchTree::countBranches(BinaryNode *t) const {
   // Node X’s barn har ingen søskende.
   // Node X’s barn har ét barn, som er et blad.
 
+  // Early return
   if (t == nullptr)
     return 0;
-  if (BinaryNode *X = getOnlyChild(t)) {         // No siblings (X)
-    if (BinaryNode *X_Child = getOnlyChild(X)) { // Only child (X's child)
-      if (BinaryNode *X_Child_Child =
-              getOnlyChild(X_Child)) { // Only child (X's child's child)
-        if (X_Child_Child->left == nullptr &&
-            X_Child_Child->right ==
-                nullptr) { // Leaf (X's child's child and leaf)
-          return 1;
-        }
-      }
+
+  // Check for only child (X)
+  BinaryNode *X = getOnlyChild(t);
+  if (X == nullptr) {
+    // Not only child
+    // Can be 0 or 2 children
+
+    // Skip nodes with siblings
+    if (t->left != nullptr && t->right != nullptr) {
+      return countBranches(t->left) + countBranches(t->right);
     }
-    return countBranches(X->left) + countBranches(X->right);
+
+    // Skip nodes with no children
+    return 0;
   }
-  return countBranches(t->left) + countBranches(t->right);
+
+  // Check for child with only child (X's child)
+  BinaryNode *X_Child = getOnlyChild(X);
+  if (X_Child == nullptr) {
+    // Not only child
+    // Can be 0 or 2 children
+
+    // Skip nodes with siblings
+    if (X->left != nullptr && X->right != nullptr) {
+      return countBranches(X->left) + countBranches(X->right);
+    }
+
+    // Skip nodes with no children
+    return 0;
+  }
+
+  // Check for child with only child (X's child child)
+  BinaryNode *X_Child_Child = getOnlyChild(X_Child);
+  if (X_Child_Child == nullptr) {
+    // Not only child
+    // Can be 0 or 2 children
+
+    // Skip nodes with siblings
+    if (X_Child->left != nullptr && X_Child->right != nullptr) {
+      return countBranches(X_Child->left) + countBranches(X_Child->right);
+    }
+
+    // Skip nodes with no children
+    return 0;
+  }
+
+  // Check for leaf (X's child's child and leaf)
+  if (X_Child_Child->left == nullptr && X_Child_Child->right == nullptr) {
+    cout << "Branch at: " << X->element << endl;
+    return 1;
+  }
+
+  cout << "Not leaf at: " << X_Child_Child->element << endl;
+
+  // Not leaf check from onlychild and down
+  return countBranches(X_Child);
 }

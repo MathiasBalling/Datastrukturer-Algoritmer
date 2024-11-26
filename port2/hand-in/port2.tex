@@ -83,52 +83,19 @@ BinaryNode *BinarySearchTree::getOnlyChild(BinaryNode *t) const {
 }
 
 int BinarySearchTree::countBranches(BinaryNode *t) const {
-  // Early return
   if (t == nullptr)
     return 0;
-  // Check for only child (X)
-  BinaryNode *X = getOnlyChild(t);
-  if (X == nullptr) {
-    // Not only child. Can be 0 or 2 children
-    // Recursively check for branches
-    if (t->left != nullptr && t->right != nullptr) {
-      return countBranches(t->left) + countBranches(t->right);
+  if (BinaryNode *X = getOnlyChild(t)) { // No siblings (X)
+    if (BinaryNode *X_Child = getOnlyChild(X)) { // Only child (X's child)
+      if (BinaryNode *X_Child_Child = getOnlyChild(X_Child)) { // Only child (X's child's child)
+        if (X_Child_Child->left == nullptr && 
+           X_Child_Child->right == nullptr) { // Leaf (X's child's child and leaf)
+          return 1;
+        }
+      }
     }
-    // Skip nodes with no children
-    return 0;
   }
-
-  // Check for child with only child (X's child)
-  BinaryNode *X_Child = getOnlyChild(X);
-  if (X_Child == nullptr) {
-    // Not only child. Can be 0 or 2 children
-    // Recursively check for branches
-    if (X->left != nullptr && X->right != nullptr) {
-      return countBranches(X->left) + countBranches(X->right);
-    }
-    // Skip nodes with no children
-    return 0;
-  }
-
-  // Check for child with only child (X's child child)
-  BinaryNode *X_Child_Child = getOnlyChild(X_Child);
-  if (X_Child_Child == nullptr) {
-    // Not only child. Can be 0 or 2 children
-    // Recursively check for branches
-    if (X_Child->left != nullptr && X_Child->right != nullptr) {
-      return countBranches(X_Child->left) + countBranches(X_Child->right);
-    }
-    // Skip nodes with no children
-    return 0;
-  }
-
-  // Check for leaf (X's child's child and leaf)
-  if (X_Child_Child->left == nullptr && X_Child_Child->right == nullptr) {
-    // Found leaf -> This is a branch
-    return 1;
-  }
-  // Not leaf check from X_Child and down
-  return countBranches(X_Child);
+  return countBranches(t->left) + countBranches(t->right);
 }
 \end{minted}
 
@@ -141,8 +108,10 @@ mere end 1.
 
 Sædvanlige oplysninger:\\
 - Højde: 6 (7 $\to$ 28 $\to$ 55 $\to$ 51 $\to$ 48 $\to$ 40 $\to$ 35)\\
-- Internal path length: $0 + 2 * 1 + 2 * 2 + 3 * 3 + 4 * 4 + 5 * 2 + 6 = 47$
-
+- Internal path length: $0 + 2 * 1 + 2 * 2 + 3 * 3 + 4 * 4 + 5 * 2 + 6 = 47$\\
+- Antal noder: 15\\
+- Antal leafs: 4\\
+- Antal fulle noder: 3
 
 Optimale højde + matematisk udtryk:\\
 Den optimale højde er $h = \log{(n + 1)}$\\
@@ -150,9 +119,10 @@ Da vi har $n=15$ elementer så er optimale højde $h = \log{(16)}=4$
 
 \textbf{Supplerende opgave 2:}
 
-Fra binære søgetræ til prioritetskø (trin + tidskompleksitet):
-
-
+Fra binære søgetræ til prioritetskø (trin + tidskompleksitet):\\
+Jeg ville bruge en level order traversering, hvor jeg putter alle elementer i en
+prioritetskø i den rækkefølge level order vil give os. Tidskompleksiteten af
+denne opgave er $O(n)$.
 \section{Opgave} %3
 \textbf{List rækkefølgen I hvilken noderne vil blive besøgt I en en in order og i en level order traversering.}
 

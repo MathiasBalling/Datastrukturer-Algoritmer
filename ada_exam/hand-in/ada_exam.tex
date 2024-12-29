@@ -1,0 +1,159 @@
+\documentclass{article}
+
+\input{preamble.tex}
+
+
+\title{ADA exam}
+\author{Mathias Balling Christiansen}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Opgave} %1
+1. Første loop
+\begin{minted}{cpp}
+for (int j = 0; j < N; j++) {
+    for (int i = N; i > 0; i = i / 3) {
+        for (int k = N; k > 0; k = k / 2) {
+            x++;
+        }
+    }
+}
+\end{minted}
+
+Ydre loop:
+
+- Løber over \( j \) fra \( 0 \) til \( N - 1 \), hvilket giver \( O(N) \).
+
+Mellemste loop:
+
+- \( i \) starter ved \( N \) og divideres med 3 i hver iteration (\( i = i / 3 \)).\\
+- Antallet af iterationer for dette loop er \( \log_3(N) \), hvilket giver \( O(\log N) \).
+
+Indre loop:
+
+- \( k \) starter ved \( N \) og divideres med 2 i hver iteration (\( k = k / 2 \)).\\
+- Antallet af iterationer for dette loop er \( \log_2(N) \), hvilket giver \( O(\log N) \).
+
+Samlet tid for de tre loops:
+
+- Den totale tid for denne del af koden er produktet af iterationerne:
+  \[
+  O(N) \cdot O(\log_3(N)) \cdot O(\log_2(N)) = O(N \cdot \log^2(N))
+  \]
+\line(1,0){\textwidth}
+
+2. Andet loop
+\begin{minted}{cpp}
+for (float v = 0; v < N; v += Math.sqrt(0.001)) {
+    y++;
+}
+\end{minted}
+
+Antallet af iterationer:
+
+  - \( v \) starter ved \( 0 \) og øges med \( \sqrt{0.001} \) i hver iteration.\\
+  - Antallet af iterationer er givet ved:
+  \[
+  \frac{N}{\sqrt{0.001}} = O(N)
+  \]
+\line(1,0){\textwidth}
+
+Den samlede tidskompleksitet for metoden er:
+\[
+O(N \cdot \log^2(N))
+\]
+\section{Opgave} %2
+Koden:
+\begin{minted}{cpp}
+int sumDeleligMedTreOgOtte(int N) {
+  // Basecase
+  if (N < 3)
+    return 0;
+  int otteMod = N % 8;
+  int treMod = N % 3;
+  int nextOtteMod = (N - 1) % 8;
+  int nextTreMod = (N - 1) % 3;
+  int next = nextOtteMod > nextTreMod ? nextTreMod + 1 : nextOtteMod + 1;
+
+  if (otteMod == 0 || treMod == 0) {
+    return N + sumDeleligMedTreOgOtte(N - next);
+  } else {
+    return sumDeleligMedTreOgOtte(N - next);
+  }
+}
+\end{minted}
+\section{Opgave} %3
+\section{Opgave} %4
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+Index  & Value & Hop \\ \hline
+44       & & 0000   \\ \hline
+45       & & 0000   \\ \hline
+46       & E & 1000   \\ \hline
+47       & A & 1000   \\ \hline
+48       & & 0000   \\ \hline
+49       & G & 1000   \\ \hline
+50       & I & 1000   \\ \hline
+51       & B & 1111   \\ \hline
+52       & D & 0000   \\ \hline
+53       & F & 0001   \\ \hline
+54       & J & 0000   \\ \hline
+55       & C & 1000   \\ \hline
+56       & H & 0000   \\ \hline
+57       & & 0000   \\ \hline
+\end{tabular}
+\end{table}
+
+If the next index is 50 then we won't be able to insert it and another hashing function i needed.
+
+\section{Opgave} %5
+
+Using Dijkstras Algorithm:
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+v  & Known & $d_v$  & $p_v$     \\ \hline
+A  & true  & 0     & 0    \\ \hline
+B  & true  & 8     & F   \\ \hline
+C  & true  & 11    & B   \\ \hline
+D  & true  & 15    & C   \\ \hline
+E  & true  & 11    & B   \\ \hline
+F  & true  & 5     & A   \\ \hline
+G  & true  & 13    & E   \\ \hline
+H  & true  & 16    & C   \\ \hline
+I  & true  & 19    & D    \\ \hline
+J  & true  & 7     & F   \\ \hline
+\end{tabular}
+\end{table}
+
+Jeg bruger Kruskal's 
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+Weight  & Node-pair \\ \hline
+2       & (F,J)     \\ \hline
+2       & (E,G)     \\ \hline
+3       & (F,B)     \\ \hline
+3       & (B,C)     \\ \hline
+3       & (B,E)     \\ \hline
+3       & (H,I)     \\ \hline
+4       & (C,D)     \\ \hline
+4       & (D,I)     \\ \hline
+5       & (A,F)     \\ \hline
+\end{tabular}
+\end{table}
+
+Totale vægt: 29
+
+\end{document}

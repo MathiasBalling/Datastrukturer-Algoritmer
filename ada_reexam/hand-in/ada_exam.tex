@@ -1,0 +1,269 @@
+\documentclass{article}
+
+\input{preamble.tex}
+
+
+\title{ADA reexam}
+\author{Mathias Balling Christiansen}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Opgave} %1
+\begin{minted}{cpp}
+bool sumAfToTalLigParameterV1(int arr[], int len, int X) {
+  // O(n^2)
+  for (int i = 0; i < len - 1; i++) {
+    for (int j = 1; j < len; j++) {
+      int sum = arr[i] + arr[j];
+      if (sum == X) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+bool sumAfToTalLigParameterV2(int arr[], int len, int X) {
+  // O(n)
+  int right_idx = len - 1;
+  int left_idx = 0;
+  while (true) {
+    int sum = arr[left_idx] + arr[right_idx];
+    if (sum == X) {
+      return true;
+    } else if (sum > X) {
+      right_idx--;
+    } else if (sum < X) {
+      left_idx++;
+    }
+    if (left_idx == right_idx) {
+      return false;
+    }
+  }
+  return false;
+}
+\end{minted}
+\section{Opgave} %2
+1. Første loop
+\begin{minted}{cpp}
+for (int i = 0; i < 10000; i++) { 
+    for (int j = 0; j < N*10; j++) { 
+        for (int k = N; k > 0; k = k/10) { 
+            x++; 
+        } 
+    } 
+}
+\end{minted}
+
+Ydre loop:
+
+- Løber over \( i \) fra \( 0 \) til \( 10000 \), hvilket giver \( O(1) \).
+
+Mellemste loop:
+
+- \( j \) løber fra \( 0 \) til \( 10*N \), hvilket giver \( O(N) \)
+
+Indre loop:
+
+- \( k \) starter ved \( N \) og divideres med 10 i hver iteration (\( k = k / 10 \)).\\
+- Antallet af iterationer for dette loop er \( \log_10(N) \), hvilket giver \( O(\log N) \).
+
+Samlet tid for de tre loops:
+
+- Den totale tid for denne del af koden er produktet af iterationerne:
+  \[
+  O(1) \cdot O(N) \cdot O(\log(N)) = O(N \cdot \log(N))
+  \]
+
+\section{Opgave} %3
+\begin{minted}{cpp}
+const std::string vowels = "aeiouy";
+int antalVokaler(std::string str, int l) {
+  // Basecase
+  if (l < 0) {
+    return 0;
+  }
+  if (vowels.find(str[0]) != std::string::npos) {
+    return 1 + antalVokaler(str.substr(1), l - 1);
+  } else {
+    return antalVokaler(str.substr(1), l - 1);
+  }
+}
+\end{minted}
+\section{Opgave} %4
+\begin{minted}{cpp}
+void minSortering(int arr[100]) {
+  int count_arr[201] = {};
+  for (size_t i = 0; i < 100; i++) {
+    count_arr[arr[i]]++;
+  }
+  // 0 -> 200 is always constant O(1)
+  for (size_t i = 0; i < 201; i++) {
+    // O(N)
+    for (size_t j = 0; j < count_arr[i]; j++) {
+      std::print("{} ", i);
+    }
+  }
+  std::println("");
+}
+\end{minted}
+\section{Opgave} %5
+\{0,9,23,106,10,36,38,98,84,12,14,50,55,35,68\}
+
+%           9
+%        /       \
+%      23         106
+%    /   \      /    \
+%  10    36    38    98
+% / \   / \   / \    / 
+%84 12 14 50 55 35 68
+Opfyld max-heap fra bunden. 
+\begin{itemize}
+  \item Byt 10 og 84
+  \item Byt 50 og 36
+  \item Byt 38 og 55
+%           9
+%        /       \
+%      23         106
+%    /   \      /    \
+%  84    50    55    98
+% / \   / \   / \    / 
+%10 12 14 36 38 35 68
+  \item Byt 84 og 23
+  \item Byt 106 og 9
+  \item Byt 98 og 9
+  \item Byt 68 og 9
+\end{itemize}
+%           106
+%        /       \
+%      84         98
+%    /   \      /    \
+%  23    50    55    68
+% / \   / \   / \    / 
+%10 12 14 36 38 35  9
+
+Endeligt array:
+\{0,106,84,98,23,50,55,68,10,12,14,36,38,35,9\}
+
+Træet ville være komplet da det er fyldt op fra venstre til højre,
+men ikke udfyldt helt på sidste niveau for at være perfekt.
+
+\section{Opgave} %6
+DEMOCRAT:
+\begin{itemize}
+  \item D=\( 11*4\%16=12 \)
+  \item E=\( 11*5\%16=7 \)
+  \item M=\( 11*13\%16=15 \)
+  \item O=\( 11*15\%16=5 \)
+  \item C=\( 11*3\%16=1 \)
+  \item R=\( 11*18\%16=6 \)
+  \item A=\( 11*1\%16=11 \)
+  \item T=\( 11*20\%16=12 \)
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+Index    & Value \\ \hline
+0        &      \\ \hline
+1        & C     \\ \hline
+2        &      \\ \hline
+3        &      \\ \hline
+4        &      \\ \hline
+5        & O     \\ \hline
+6        & R     \\ \hline
+7        & E     \\ \hline
+8        &      \\ \hline
+9        &      \\ \hline
+10       &      \\ \hline
+11       & A     \\ \hline
+12       & D     \\ \hline
+13       & T     \\ \hline
+14       &      \\ \hline
+15       & M     \\ \hline
+\end{tabular}
+\end{table}
+REPUBLICAN:
+\begin{itemize}
+  \item R=\( 11*18\%16=6 \)
+  \item E=\( 11*5\%16=7 \)
+  \item P=\( 11*16\%16=0 \)
+  \item U=\( 11*21\%16=7 \)
+  \item B=\( 11*2\%16=6 \)
+  \item L=\( 11*12\%16=4 \)
+  \item I=\( 11*9\%16=3 \)
+  \item C=\( 11*3\%16=1 \)
+  \item A=\( 11*1\%16=11 \)
+  \item N=\( 11*14\%16=10 \)
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+Index    & Value \\ \hline
+0        & P    \\ \hline
+1        & C     \\ \hline
+2        &      \\ \hline
+3        & I    \\ \hline
+4        & L    \\ \hline
+5        &       \\ \hline
+6        & R      \\ \hline
+7        & E      \\ \hline
+8        & U    \\ \hline
+9        &     \\ \hline
+10       & B    \\ \hline
+11       & A     \\ \hline
+12       &       \\ \hline
+13       &       \\ \hline
+14       & N    \\ \hline
+15       &       \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Opgave} %7
+Using Dijkstras Algorithm:
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+v  & Known & $d_v$   & $p_v$     \\ \hline
+S  & true  & 0    & 0    \\ \hline
+A  & true  & 4    & H   \\ \hline
+B  & true  & 9    & F   \\ \hline
+C  & true  & 16   & G   \\ \hline
+D  & true  & 20   & C   \\ \hline
+E  & true  & 11   & H   \\ \hline
+F  & true  & 7    & A   \\ \hline
+G  & true  & 13   & E   \\ \hline
+H  & true  & 2    & S    \\ \hline
+\end{tabular}
+\end{table}
+
+Jeg bruger Kruskal's. Rækkefølge følger tabellen.
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+Weight  & Node-pair \\ \hline
+2       & (S,H)     \\ \hline
+2       & (H,A)     \\ \hline
+2       & (H,F)     \\ \hline
+2       & (F,B)     \\ \hline
+2       & (E,G)     \\ \hline
+3       & (G,C)     \\ \hline
+4       & (C,D)     \\ \hline
+5       & (B,E)     \\ \hline
+\end{tabular}
+\end{table}
+Total vægt: 22
+
+\end{document}

@@ -1,5 +1,6 @@
 #include "BinarySearchTree.h"
 #include <deque>
+#include <string>
 
 BinarySearchTree::BinarySearchTree() : root{nullptr} {}
 
@@ -231,4 +232,28 @@ int BinarySearchTree::internalPathLenght(BinaryNode *t, int depth) const {
     return 0;
   return depth + internalPathLenght(t->left, depth + 1) +
          internalPathLenght(t->right, depth + 1);
+}
+
+void BinarySearchTree::printRoute(int value) {
+  std::string route = findRoute(root, value);
+  if (route != "") {
+    cout << route << endl;
+  } else {
+    cout << "No route to " << value << " found." << endl;
+  }
+}
+string BinarySearchTree::findRoute(BinaryNode *root, int value) {
+  if (!root)
+    return "";
+  if (root->element == value) {
+    return to_string(value);
+  }
+  std::string left = findRoute(root->left, value);
+  std::string right = findRoute(root->right, value);
+  if (left.find(to_string(value)) != std::string::npos) {
+    return to_string(root->element) + " " + left;
+  } else if (right.find(to_string(value)) != std::string::npos) {
+    return to_string(root->element) + " " + right;
+  }
+  return findRoute(root->left, value) + findRoute(root->right, value);
 }

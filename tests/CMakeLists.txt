@@ -16,6 +16,5 @@ include_directories(../Prioritetskø/)
 include_directories(../Binært_søgetræ/)
 include_directories(../CriticalPath/)
 
-add_executable(test1 test1.cpp)
 add_executable(heap heap.cpp)
 add_executable(heap_aktivity heap_aktivity.cpp ../CriticalPath/Aktivitet.cpp)

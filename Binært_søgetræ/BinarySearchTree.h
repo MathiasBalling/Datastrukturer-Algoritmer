@@ -46,6 +46,7 @@ public:
   void printCountFullNodes() const;
 
   void printInternalPathLenght() const;
+  void printRoute(int value);
 
 private:
   BinaryNode *root;
@@ -73,6 +74,7 @@ private:
   int countFullNodes(BinaryNode *t) const;
 
   int internalPathLenght(BinaryNode *t, int depth) const;
+  string findRoute(BinaryNode *root, int value);
 };
 
 #endif

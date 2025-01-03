@@ -1,0 +1,240 @@
+\documentclass{article}
+
+\input{preamble.tex}
+
+
+\title{ADA exam}
+\author{190483865}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Opgave 1}
+\begin{minted}{cpp}
+// Jeg går ud fra at index start ved længden af ordet minus 1.
+// Eksempel kald:
+// std::string word = "banana";
+// countLettersInWord(word, 'a', word.length() - 1);
+
+int countLettersInWord(std::string word, char letter, int index) {
+  if (index < 0) {
+    return 0;
+  }
+  if (word[index] == letter) {
+    return 1 + countLettersInWord(word, letter, index - 1);
+  } else {
+    return countLettersInWord(word, letter, index - 1);
+  }
+}
+\end{minted}
+
+\section{Opgave 2}
+For loop 1:
+
+Yderste for loop har: $O(\log{N})$ pga. $i+=i$.
+
+Mellemste har $O({\log^2{N}})$ da ${\log^2{N}}\sim 2\cdot{\ln^2{N}}$
+
+Inderste har: $O(\sqrt{N})$, da $k$ kører til kvadratroden af $N$.
+
+For loop 2:
+
+Tidskompleksitet $O(N\cdot \sqrt{N})$
+
+\line(1,0){\textwidth}
+
+Værdier fra test:\\
+N:300,x:5346,y:5197\\
+N:301,x:5346,y:5223\\
+N:302,x:5346,y:5249\\
+N:303,x:5346,y:5275\\
+N:304,x:5346,y:5301\\
+N:305,x:5346,y:5327\\
+N:306,x:5346,y:5353\\
+N:307,x:5346,y:5380\\
+N:308,x:5346,y:5406\\
+N:309,x:5346,y:5432\\
+N:310,x:5346,y:5459
+
+Det ses at ved værdier over $N>=306$ er 2. for loop langsommere end det første. 
+Dvs. $N<306$ er 2. for loop hurtigere end det første. 
+
+\line(1,0){\textwidth}
+
+Den samlede tidskompleksitet er 
+$$
+\begin{array}{cl}
+  N>=306: & O(N\cdot \sqrt{N})\\ 
+  N<306: & O(\log^3 {N}\cdot  \sqrt{N})
+\end{array}
+$$
+\section{Opgave 3}
+Nyt kode er har "// Ny" efter sig.
+\begin{minted}{cpp}
+int main(){
+  // Samme kode oppe over
+  string minTask = "";// Ny
+  string finalMaxSlack = "";// Ny
+  int minVarighedAktuelEvent = numeric_limits<int>::max();// Ny (#include <limits>)
+  int maxSlack = 0;// Ny
+
+  while (true) {
+    while (indeks < tabel.size() && tabel[indeks].getEvent() == aktuelEvent) {
+      if (maxVarighedAktuelEvent < tabel[indeks].getDuration()) {
+        maxVarighedAktuelEvent = tabel[indeks].getDuration();
+        maxTask = tabel[indeks].getTask();
+      }
+      if (minVarighedAktuelEvent > tabel[indeks].getDuration()) { // Ny
+        minVarighedAktuelEvent = tabel[indeks].getDuration();// Ny
+        minTask = tabel[indeks].getTask();// Ny
+      }// Ny
+
+      indeks++;
+    }
+    int slackAktuelEvent = maxVarighedAktuelEvent - minVarighedAktuelEvent;// Ny
+    if (slackAktuelEvent > maxSlack) {// Ny
+      maxSlack = slackAktuelEvent;// Ny
+      finalMaxSlack = minTask;// Ny
+    }// Ny
+
+    laengdeKritiskVej += maxVarighedAktuelEvent;
+    kritiskVej += maxTask;
+    maxVarighedAktuelEvent = 0;
+    minVarighedAktuelEvent = numeric_limits<int>::max();// Ny
+    maxTask = "";
+    minTask = ""; // Ny
+
+    if (indeks == tabel.size())
+      break;
+    aktuelEvent = tabel[indeks].getEvent();
+  }
+  cout << "Max Slack: " << finalMaxSlack << " : " << maxSlack << endl;
+
+  // Samme kode efter dette
+}
+\end{minted}
+
+\section{Opgave 4}
+\begin{minted}{cpp}
+void BinarySearchTree::printRoute(int value) {
+  std::string route = findRoute(root, value);
+  if (route != "") {
+    cout << route << endl;
+  } else {
+    cout << "No route to " << value << " found." << endl;
+  }
+}
+
+string BinarySearchTree::findRoute(BinaryNode *root, int value) {
+  if (!root)
+    return "";
+  if (root->element == value) {
+    return to_string(value);
+  }
+  std::string left = findRoute(root->left, value);
+  std::string right = findRoute(root->right, value);
+  if (left.find(to_string(value)) != std::string::npos) {
+    return to_string(root->element) + " " + left;
+  } else if (right.find(to_string(value)) != std::string::npos) {
+    return to_string(root->element) + " " + right;
+  }
+  return findRoute(root->left, value) + findRoute(root->right, value);
+}
+\end{minted}
+
+\section{Opgave 5}
+Brug af Dijkstras Algorithm:
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+v  & Known & $d_v$   & $p_v$     \\ \hline
+F  & true  & 0    & 0    \\ \hline
+A  & true  & 15   & B    \\ \hline
+B  & true  & 14   & D    \\ \hline
+C  & true  & 16   & A    \\ \hline
+D  & true  & 5    & E    \\ \hline
+E  & true  & 4    & F    \\ \hline
+G  & true  & 34   & J    \\ \hline
+H  & true  & 21   & C    \\ \hline
+I  & true  & 19   & A    \\ \hline
+J  & true  & 24   & I    \\ \hline
+\end{tabular}
+\end{table}
+
+Jeg bruger Kruskal's. Rækkefølge følger tabellen.
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+Vægt  & Node-par \\ \hline
+1       & (E,D)     \\ \hline
+1       & (B,A)     \\ \hline
+1       & (A,C)     \\ \hline
+2       & (D,I)     \\ \hline
+4       & (F,E)     \\ \hline
+4       & (A,I)     \\ \hline
+5       & (C,H)     \\ \hline
+5       & (I,J)     \\ \hline
+10      & (J,G)     \\ \hline
+\end{tabular}
+\end{table}
+
+Samlet vægt er: 33
+
+\section{Opgave 6}
+
+Y0=3\\
+Y1=4\\
+Y2=7\\
+Y3=12\\
+Y4=6\\
+Y5=2\\
+Y6=0
+
+De samme tal fortsætter herefter...
+
+Y7=0\\
+Y8=2\\
+Y9=6\\
+Y10=12
+
+Sådan vil tabellen se ud:
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+Index    & Item \\ \hline
+0        & Y6    \\ \hline
+1        &      \\ \hline
+2        & Y5    \\ \hline
+3        & X    \\ \hline
+4        & Y1   \\ \hline
+5        &      \\ \hline
+6        & Y4     \\ \hline
+7        & Y2     \\ \hline
+8        &     \\ \hline
+9        &    \\ \hline
+10       &     \\ \hline
+11       &      \\ \hline
+12       & Y3     \\ \hline
+\end{tabular}
+\end{table}
+
+
+\section{Opgave 7}
+Dette skulle representere en min-heap det vil sige alle tal under skal være større. 2 bryder dette:
+
+27 på index 11 er mindre end den prioritet oppeover på 28.
+
+18 på index 15 er mindre end den prioritet oppeover på 26.
+
+Derfor er dette ikke en prioritetskø.
+
+\end{document}
